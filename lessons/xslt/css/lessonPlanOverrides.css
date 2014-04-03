@@ -1,0 +1,72 @@
+body {
+    /*margin-left: 20px;*/
+    font-size: 150%;
+    line-height:1.4;
+        margin: 0;
+    padding: 0;
+}
+
+.btn {
+    display: none;
+}
+
+.coming-up-title {
+    display: none;
+}
+
+.endOfLessonReminder {
+    display: none;
+}
+
+.demo, .exercise, .workbook {
+    display:block;
+}
+
+H2.module-set-title-outer{
+    display:block;
+}
+  
+H2.module-title{
+    display:block;
+}
+
+.activityGenericInstruction {
+    display: block;
+}
+
+
+.display-divider {  
+    display:block;
+}
+
+.top_material {
+    font-size:100%;
+}
+
+.banner {
+    display: block;
+}
+
+
+.outer-slide {
+    background:#E8E8E8;
+}
+
+.outer-demo {
+    background: #F5EEE0;
+}
+
+.outer-exercise {
+ 	background:#DEB887;
+}
+
+.outer-workbook {
+  background:#ADD8E6;
+}
+
+/*Resized for teacher/demo but old size was correct for preview*/
+.slide, .workbook, .demo, .exercise {
+  font-size: 125%;
+  width: 450px;
+  margin-left:15px;
+}

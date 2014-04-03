@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="lesson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="pages"/>
+        <xs:element ref="standards"/>
+        <xs:element ref="objective"/>
+        <xs:element ref="prerequisites"/>
+        <xs:element maxOccurs="unbounded" ref="module"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="cdata">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="pages" type="xs:string"/>
+  <xs:element name="standards" type="xs:NMTOKEN"/>
+  <xs:element name="objective" type="xs:string"/>
+  <xs:element name="prerequisites">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="prerequisite"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="prerequisite">
+    <xs:complexType>
+       <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="module">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="misc"/>
+        <xs:element maxOccurs="unbounded" ref="teacher-display"/>
+      </xs:choice>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="teacher-display">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="demo"/>
+        <xs:element ref="exercise"/>
+        <xs:element ref="workbook"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="misc"/>
+          <xs:element ref="teachernote"/>
+        </xs:choice>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="demo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element ref="answer"/>
+        <xs:element ref="assignment-name"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="exercise">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element ref="answer"/>
+        <xs:element ref="assignment-name"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="workbook">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element ref="assignment-name"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="teachernote">
+    <xs:complexType mixed="true">
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="misc">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="example"/>
+        <xs:element ref="nextline"/>
+        <xs:element ref="table"/>
+        <xs:element ref="vocabulary"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vocabulary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="termdefinition"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="termdefinition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="term"/>
+        <xs:element ref="definition"/>
+        <xs:element ref="example"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="term" type="xs:string"/>
+  <xs:element name="definition" type="xs:string"/>
+  <xs:element name="description" type="cdata">
+<!--     <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="math"/>
+        <xs:element ref="nextline"/>
+      </xs:choice>
+    </xs:complexType> -->
+  </xs:element>
+  <xs:element name="assignment-name" type="xs:NCName"/>
+  <xs:element name="answer" type="xs:string"/>
+  <xs:element name="nextline">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="math"/>
+        <xs:element ref="table"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="example" type="cdata"/>
+ <!--    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="math"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> -->
+  <xs:element name="table">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="tr"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="td"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="td" type="xs:string"/>
+  <xs:element name="math">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="mfrac"/>
+        <xs:element ref="mrow"/>
+        <xs:element ref="msrow"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mrow">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="mfrac"/>
+        <xs:element ref="mi"/>
+        <xs:element ref="mn"/>
+        <xs:element ref="mo"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="msrow">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="mfrac"/>
+        <xs:element ref="mo"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mn" type="xs:integer"/>
+  <xs:element name="mfrac">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="mi"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="mn"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mo" type="xs:string"/>
+  <xs:element name="mi" type="xs:string"/>
+</xs:schema>
