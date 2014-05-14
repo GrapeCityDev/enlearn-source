@@ -66,6 +66,13 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="exercise">
+  
+    <xs:annotation>
+      <xs:documentation>
+        A problem set is a set of problems of the same type, using the same interface.  For example, an exercise is a problem set.
+      </xs:documentation>
+    </xs:annotation>
+    
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="description"/>
